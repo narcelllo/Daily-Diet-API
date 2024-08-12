@@ -3,6 +3,7 @@ from models.user import User
 from models.diet import Diet
 from database import db
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from datetime import datetime
 import bcrypt
 
 
@@ -118,6 +119,22 @@ def create_diet():
         return jsonify({"message": "Dieta cadastrada"})
 
     return jsonify({"message": "Dados incompletos"}), 400
+
+@app.route('/diet/<int:id_diet>', methods=['PUT'])
+@login_required
+def update_diet(id_diet):
+    data = request.json
+    diet = Diet.query.get(id_diet)
+
+    if current_user.id == diet.user_id:
+        diet.title = data.get("title")
+        diet.description = data.get("description")
+        diet.date_time = datetime.fromisoformat(data.get("date"))
+        diet.consistent_diet = data.get("consistent_diet")
+        db.session.commit()
+        return jsonify({"message": f"Dieta foi alterada"})
+    
+    return jsonify({"message": "Não permitido: Usuário não é dono da dieta"}), 403
 
     
 if __name__ == '__main__':
