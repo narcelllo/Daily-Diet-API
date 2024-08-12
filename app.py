@@ -136,7 +136,19 @@ def update_diet(id_diet):
     
     return jsonify({"message": "Não permitido: Usuário não é dono da dieta"}), 403
 
+@app.route('/diet/<int:id_diet>', methods=['DELETE'])
+@login_required
+def delete_diet(id_diet):
+    diet = Diet.query.get(id_diet)
+
+    if current_user.id == diet.user_id:
+        db.session.delete(diet)
+        db.session.commit()    
+        return jsonify({"message": f"Dieta {diet.title} Deletada"})
     
+    return jsonify({"message": "Não permitido: Usuário não é dono da dieta"}), 403
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
     
