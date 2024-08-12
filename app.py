@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from models.user import User
+from models.diet import Diet
 from database import db
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 import bcrypt
@@ -102,6 +103,23 @@ def delete_user(id_user):
     
     return jsonify({"message": f"Usuário {user.username} não encontrado"}),404
 
+@app.route('/diet', methods=['POST'])
+@login_required
+def create_diet():
+    data = request.json
+    title = data.get("title")
+    description = data.get("description")
+    consistent_diet = data.get("consistent_diet", True)
 
+    if title and description:
+        diet = Diet( user_id=current_user.id, title=title, description=description, consistent_diet=consistent_diet)
+        db.session.add(diet)
+        db.session.commit()
+        return jsonify({"message": "Dieta cadastrada"})
+
+    return jsonify({"message": "Dados incompletos"}), 400
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
+    
