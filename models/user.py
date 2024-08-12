@@ -14,4 +14,4 @@ class Diet(db.Model):
     title = db.Column(db.String(80), nullable=False, unique=True)
     description = db.Column(db.String(250), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    diet = db.Column(db.Boolean, nullable=False, default=True)
+    consistent_diet = db.Column(db.Boolean, nullable=False, default=True)
