@@ -158,6 +158,22 @@ def read_diet(id_diet):
     
     return jsonify({"message": "Não permitido: Usuário não é dono da dieta"}), 403
 
+@app.route('/diets/<int:id_user>', methods=['GET'])
+@login_required
+def read_diets(id_user):
+    diets = Diet.query.filter_by(user_id=id_user).all()
+    
+    diets_list = []
+
+    for diet in diets:
+        diets_list.append({"titulo": diet.title, "Descrição": diet.description, "Data e Hora": diet.date_time,"Dentro da dieta?": diet.consistent_diet})
+
+    if not diets_list:
+        return jsonify({"message": "Não tem dietas"}), 404
+        
+    return  jsonify({"message": diets_list})
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
     
