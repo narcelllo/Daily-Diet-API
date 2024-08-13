@@ -1,9 +1,9 @@
 # API para controle de dieta diária, a Daily Diet API.
 Autenticação de usuários utilizando Python, MySQL, SQLAlchemy, Docker e Postman.
-- Editar uma refeição, podendo alterar todos os dados acima
-- Apagar uma refeição
-- Listar todas as refeições de um usuário
-- Visualizar uma única refeição
+- Editar uma refeição, podendo alterar todos os dados.
+- Apagar uma refeição.
+- Listar todas as refeições de um usuário.
+- Visualizar uma única refeição.
 
 ## Instalação
 Considerando que você já tenha o Python e o Docker instalados em seu sistema, execute os passos para a execução do app.
