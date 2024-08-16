@@ -45,7 +45,18 @@ exit()
 
    ![Alt text](documentation/image-1.png)
 2. Postman:
-  1. Import a collection `Authentication API.postman_collection.json` e  environment `Authentication local.postman_environment.json` presentes neste repositório em seu Postman.
+  1. Em seu Postman import a collection `Authentication API.postman_collection.json` e  environment `Authentication local.postman_environment.json` presentes na pasta documentation neste repositório.
+
+## Executando testes
+Execute `app.py` com o comando:
+```bash
+python app.py
+```
+Para testar estruturas de usuários execute o comando:
+```bash
+pytest tests\tests.py -v 
+```
+
 
 ## Requisitos
 - Python 3.12.3
