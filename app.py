@@ -76,10 +76,11 @@ def update_user(id_user):
     user = User.query.get(id_user)
 
     if id_user != current_user.id and current_user.role == "user":
-        return jsonify({"message": f"Não permitido"}), 403
+        return jsonify({"message": "Não permitido"}), 403
     
     if user and data.get("password"):
-        user.password = data.get("password")
+        hashed_password = bcrypt.hashpw(str.encode(data.get("password")), bcrypt.gensalt())
+        user.password = hashed_password
         db.session.commit()
         
         return jsonify({"message": f"senha do uário {user.id} atualizado"})
