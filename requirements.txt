@@ -6,3 +6,5 @@ Pymysql==1.1.1
 Cryptography==43.0.0
 Bcrypt==4.2.0
 DateTime==5.5.0
+pytest==8.3.2
+requests==2.32.3
