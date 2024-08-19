@@ -33,7 +33,7 @@ def login():
         if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
             login_user(user)
             print(current_user.is_authenticated)
-            return jsonify({"message": "Logado","id": user.id })
+            return jsonify({"message": "Logado","id": user.id})
     
     return jsonify({"message": "Credenciais invalidas"}), 400
 
@@ -55,7 +55,7 @@ def create_user():
         user = User(username=username, password=hashed_password, role='user')
         db.session.add(user)
         db.session.commit()
-        return jsonify({"message": "Cadastrado"})
+        return jsonify({"message": "Cadastrado", "id": user.id})
 
     return jsonify({"message": "Dados invalidas"}), 400
 

@@ -54,7 +54,7 @@ python app.py
 ```
 Para testar estruturas de usuários execute o comando:
 ```bash
-pytest tests\tests.py -v 
+pytest tests.py -v 
 ```
 
 
