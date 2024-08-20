@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from models.user import User
 from models.diet import Diet
 from database import db
-from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from datetime import datetime
 import bcrypt
 
@@ -10,6 +11,8 @@ import bcrypt
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "my_key"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:admin123@127.0.0.1:3306/Daily-diet'
+
+jwt = JWTManager(app)
 
 login_manager = LoginManager()
 db.init_app(app)
@@ -31,9 +34,10 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
+            access_token = create_access_token(identity=user.id)
             login_user(user)
             print(current_user.is_authenticated)
-            return jsonify({"message": "Logado","id": user.id})
+            return jsonify({"message": "Logado","id": user.id, "token": access_token})
     
     return jsonify({"message": "Credenciais invalidas"}), 400
 
@@ -107,6 +111,7 @@ def delete_user(id_user):
 
 @app.route('/diet', methods=['POST'])
 @login_required
+#@jwt_required
 def create_diet():
     data = request.json
     title = data.get("title")
@@ -117,7 +122,7 @@ def create_diet():
         diet = Diet( user_id=current_user.id, title=title, description=description, consistent_diet=consistent_diet)
         db.session.add(diet)
         db.session.commit()
-        return jsonify({"message": "Dieta cadastrada"})
+        return jsonify({"message": "Dieta cadastrada", "id": diet.id})
 
     return jsonify({"message": "Dados incompletos"}), 400
 
