@@ -34,7 +34,7 @@ docker-compose up
 flask shell
 ```
 ```bash
-db.crate_all()
+db.create_all()
 ```
 ```bash
 exit()
