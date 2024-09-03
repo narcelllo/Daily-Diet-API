@@ -37,6 +37,9 @@ flask shell
 db.create_all()
 ```
 ```bash
+db.session.commit()
+```
+```bash
 exit()
 ```
 ## Execução do app
