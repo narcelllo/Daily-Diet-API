@@ -5,7 +5,7 @@ Autenticação de usuários utilizando Python, MySQL, SQLAlchemy, Docker e Postm
 - Listar todas as refeições de um usuário.
 - Visualizar uma única refeição.
 
-## Execução
+## Execusão
 Considerando que você já tenha o Python e o Docker instalados em seu sistema, execute os passos para a execução do app.
 
 1. Clone o repositório para sua máquina local:
