@@ -9,11 +9,11 @@ Autenticação de usuários utilizando Python, MySQL, SQLAlchemy, Docker e Postm
 Considerando que você já tenha o Python e o Docker instalados em seu sistema, execute os passos para a execução do app.
 
 1. Clone o repositório para sua máquina local:
-```bash
+```
 git clone https://github.com/narcelllo/rocketseat_sample-flask-auth.git
 ```
 2. Navegue até a pasta do projeto e execute:
-```bash
+```
 pip install -r requirements.txt
 ```
 Todas as dependências serão instaladas com base no arquivo `requirements.txt` existente neste repositório
@@ -24,22 +24,22 @@ Todas as dependências serão instaladas com base no arquivo `requirements.txt` 
   ![Alt text](documentation/image.png)
 
 2. Execute o comando:
-```bash
+```
 docker-compose up
 ```
 ## Criando banco de dados
 1. Em seu terminal acesse o flask shell: 
 
-```bash
+```
 flask shell
 ```
-```bash
+```
 db.create_all()
 ```
-```bash
+```
 db.session.commit()
 ```
-```bash
+```
 exit()
 ```
 ## Execução do app
@@ -51,7 +51,7 @@ exit()
   1. Em seu Postman import a collection `Authentication API.postman_collection.json` e  environment `Authentication local.postman_environment.json` presentes na pasta documentation neste repositório.
 
 ## Executando testes
-Para testar estruturas de usuários execute o comando:
+Para testar estruturas de usuários certifique-se que seu servidor está em execução execute o comando:
 ```
 pytest tests.py -v 
 ```
